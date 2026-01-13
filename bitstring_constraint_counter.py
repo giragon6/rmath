@@ -1,6 +1,6 @@
 from tabulate import tabulate
 
-def next(bitstrings, max_constraint=0, constraints=[]):
+def next(bitstrings, constraints=[]):
     new_bitstrings = []
     for b in bitstrings:
         illegal0=False
@@ -16,21 +16,13 @@ def next(bitstrings, max_constraint=0, constraints=[]):
     return new_bitstrings
         
 def get_x(n, constraints=[]):
-    MAX_LENGTH_CONSTRAINT=0
-    if len(constraints) > 0:
-        MAX_LENGTH_CONSTRAINT = max([len(c) for c in constraints])
     bs = [""]
     for i in range(n):
-        bs = next(bs, max_constraint=MAX_LENGTH_CONSTRAINT, constraints=constraints)
-    return bs
+        bs = next(bs, constraints=constraints)
+    return bs  
     
-# print("x_0=0")
-# for i in range(20):
-#     print(f"x_{i+1}={len(get_x(i+1, constraints=["0101"]))}")
-    
-    
-reps = 20
-combos = ["111","000","100","011","001","110"]
+reps = 40
+combos = ["001"]
 combos_bs = {}
 
 combos_bs["x"] = []
