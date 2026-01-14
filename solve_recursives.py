@@ -6,11 +6,17 @@ bsgraph = BitstringGraph(constraints)
 def as_equation(a, s, xn_a, xn_s):
   eq = f"x(n) = {' + '.join([f"{k[0]}(n-{k[1]})" for k in xn_a])}"
   if len(xn_s) > 0:
-    eq += f" - {' - '.join([f"{k[0]}(n-{k[1]})" for k in xn_s])}"
+    if len(eq) > 7:
+      eq += ' - ' 
+    eq += ' - '.join([f"{k[0]}(n-{k[1]})" for k in xn_s])
   if len(a) > 0:
-    eq += f" + {' + '.join([f"{k[0]}(n-{k[1]})" for k in a])}"
+    if len(eq) > 7:
+      eq += ' + ' 
+    eq += ' + '.join([f"{k[0]}(n-{k[1]})" for k in a])
   if len(s) > 0:
-    eq += f" - {' - '.join([f"{k[0]}(n-{k[1]})" for k in s])}"
+    if len(eq) > 7:
+      eq += ' - ' 
+    eq += ' - '.join([f"{k[0]}(n-{k[1]})" for k in s])
   return eq
 
 def try_get_xn(s, xn, init, depth=1):
@@ -74,4 +80,8 @@ while True:
       depth = input()
       add.append((combo, int(depth)))
       subtract.append((combo, int(depth)))
+    case "exit": 
+      break
+  print()
   print(as_equation(add, subtract, xn_add, xn_sub))
+  print()
